@@ -3,25 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sudoku Generator</title>
+    <title>Sudoku</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Sudoku Game</h1>
-    <!-- Difficulty selection dropdown -->
-    <div>
-      <label for="difficulty">Select Difficulty:</label>
-      <select id="difficulty">
-        <option value="1">1 - Easy</option>
-        <option value="3">2 - Medium</option>
-        <option value="5">3 - Hard</option>
-        <option value="6">4 - Very Hard</option>
-        <option value="7" selected>5 - Extreme</option>
-      </select>
+    <div class="container">
+      <header>
+        <h1>Sudoku Generator</h1>
+        <p>Generate and Solve Sudoku puzzles with ease</p>
+      </header>
+      <div class="game-container">
+        <div class="difficulty-selector">
+          <label for="difficulty">Select Difficulty:</label>
+          <select id="difficulty">
+            <option value="1">1 - Easy</option>
+            <option value="3">2 - Medium</option>
+            <option value="5" selected>3 - Hard</option>
+            <option value="6">4 - Very Hard</option>
+            <option value="7">5 - Extreme</option>
+          </select>
+        </div>
+        <button id="generate-btn">Generate Sudoku</button>
+        <button id="solve-btn" disabled>Solve Sudoku</button>
+        <div id="sudoku-container" class="sudoku-grid"></div>
+      </div>
     </div>
-    <button id="generate-btn">Generate Sudoku</button>
-    <button id="solve-btn" disabled>Solve Sudoku</button>
-    <div id="sudoku-container" class="sudoku-grid"></div>
 
     <script src="app.js"></script>
   </body>
