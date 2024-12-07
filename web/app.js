@@ -5,7 +5,7 @@ document
       const apiUrl =
         location.hostname === "localhost" || location.hostname === "127.0.0.1"
           ? "http://localhost:8080/generate?difficulty=5" // Local URL for development
-          : "https://jokerjoker91.github.io/Sudoku/generate"; // GitHub Pages URL for production
+          : "https://sudoku-yy8u.onrender.com/generate"; // GitHub Pages URL for production
 
       const response = await fetch(apiUrl); // Fetch the grid from the appropriate URL
       const sudokuGrid = await response.json();
@@ -39,7 +39,7 @@ document
               location.hostname === "localhost" ||
               location.hostname === "127.0.0.1"
                 ? "http://localhost:8080/validate" // Local URL for development
-                : "https://jokerjoker91.github.io/Sudoku/validate"; // GitHub Pages URL for production
+                : "https://sudoku-yy8u.onrender.com/validate"; // GitHub Pages URL for production
 
             // Send the number to the backend for validation
             const response = await fetch(apiUrl, {
@@ -99,7 +99,7 @@ document
       const apiUrl =
         location.hostname === "localhost" || location.hostname === "127.0.0.1"
           ? "http://localhost:8080/solve" // Local URL for development
-          : "https://jokerjoker91.github.io/Sudoku/solve"; // GitHub Pages URL for production
+          : "https://sudoku-yy8u.onrender.com/solve"; // GitHub Pages URL for production
 
       const response = await fetch(apiUrl, {
         method: "POST",

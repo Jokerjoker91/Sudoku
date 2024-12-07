@@ -1,7 +1,9 @@
 package main
 
 import (
+	"log"
 	"net/http"
+	"os"
 	"sudoku-app/internal/handlers"
 )
 
@@ -16,5 +18,17 @@ func main() {
 	http.Handle("/", fs)
 
 	// Start the server
-	http.ListenAndServe("localhost:8080", nil)
+	port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080" // Default port for local development
+    }
+
+    log.Printf("Server starting on port %s...\n", port)
+    log.Fatal(http.ListenAndServe(":"+port, nil))
+
+	servUrl:= "localhost:" + port
+
+	http.ListenAndServe(servUrl, nil)
+
+
 }

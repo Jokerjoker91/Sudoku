@@ -26,7 +26,7 @@ This is a web-based Sudoku game that allows users to generate new puzzles, solve
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/Sudoku.git
+   git clone https://github.com/Jokerjoker91/Sudoku.git
    cd Sudoku
 
    ```
