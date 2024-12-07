@@ -2,9 +2,12 @@ document
   .getElementById("generate-btn")
   .addEventListener("click", async function () {
     try {
-      const response = await fetch(
-        "http://localhost:8080/generate?difficulty=5"
-      ); // Adjust difficulty as needed
+      const apiUrl =
+        location.hostname === "localhost" || location.hostname === "127.0.0.1"
+          ? "http://localhost:8080/generate?difficulty=5" // Local URL for development
+          : "https://jokerjoker91.github.io/Sudoku/generate"; // GitHub Pages URL for production
+
+      const response = await fetch(apiUrl); // Fetch the grid from the appropriate URL
       const sudokuGrid = await response.json();
 
       const sudokuContainer = document.getElementById("sudoku-container");
@@ -32,8 +35,14 @@ document
               return; // Ignore if the input is not a number
             }
 
+            const apiUrl =
+              location.hostname === "localhost" ||
+              location.hostname === "127.0.0.1"
+                ? "http://localhost:8080/validate" // Local URL for development
+                : "https://jokerjoker91.github.io/Sudoku/validate"; // GitHub Pages URL for production
+
             // Send the number to the backend for validation
-            const response = await fetch("http://localhost:8080/validate", {
+            const response = await fetch(apiUrl, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
@@ -87,7 +96,12 @@ document
     }
 
     try {
-      const response = await fetch("http://localhost:8080/solve", {
+      const apiUrl =
+        location.hostname === "localhost" || location.hostname === "127.0.0.1"
+          ? "http://localhost:8080/solve" // Local URL for development
+          : "https://jokerjoker91.github.io/Sudoku/solve"; // GitHub Pages URL for production
+
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ grid: sudokuGrid }),
