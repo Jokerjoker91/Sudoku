@@ -1,12 +1,14 @@
 document
   .getElementById("generate-btn")
   .addEventListener("click", async function () {
-    console.log(location.hostname);
     try {
+      // Get the selected difficulty from the dropdown
+      const difficulty = document.getElementById("difficulty").value;
+
       const apiUrl =
         location.hostname === "localhost" || location.hostname === "127.0.0.1"
-          ? "http://localhost:8080/generate?difficulty=5" // Local URL for development
-          : "https://sudoku-yy8u.onrender.com/generate?difficulty=5"; // GitHub Pages URL for production
+          ? `http://localhost:8080/generate?difficulty=${difficulty}` // Local URL for development
+          : `https://sudoku-yy8u.onrender.com/generate?difficulty=${difficulty}`; // GitHub Pages URL for production
 
       const response = await fetch(apiUrl); // Fetch the grid from the appropriate URL
       const sudokuGrid = await response.json();

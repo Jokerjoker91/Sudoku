@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
+	"strconv"
 	"sudoku-app/internal/sudoku"
 )
 
@@ -31,16 +31,19 @@ func ValidateHandler(w http.ResponseWriter, r *http.Request) {
 
 // GenerateHandler handles Sudoku puzzle generation
 func GenerateHandler(w http.ResponseWriter, r *http.Request) {
-	difficulty := 9 // Default difficulty level
-	if d, ok := r.URL.Query()["difficulty"]; ok && len(d) > 0 {
-		_, err := fmt.Sscanf(d[0], "%d", &difficulty)
-		if err != nil || difficulty < 1 || difficulty > 9 {
-			http.Error(w, "Invalid difficulty level", http.StatusBadRequest)
-			return
-		}
+	difficulty := r.URL.Query().Get("difficulty")
+	if difficulty == "" {
+		difficulty = "5" // Default difficulty
 	}
 
-	grid := sudoku.GenerateSudoku(difficulty)
+	// Convert the difficulty to an integer
+	difficultyLevel, err := strconv.Atoi(difficulty)
+	if err != nil {
+		http.Error(w, "Invalid difficulty level", http.StatusBadRequest)
+		return
+	}
+
+	grid := sudoku.GenerateSudoku(difficultyLevel)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(grid)
 }
