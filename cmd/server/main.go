@@ -13,22 +13,19 @@ func main() {
 	http.HandleFunc("/solve", handlers.SolveHandler)
 	http.HandleFunc("/validate", handlers.ValidateHandler)
 
-	// Serve static files for the frontend
-	fs := http.FileServer(http.Dir("./web"))
-	http.Handle("/", fs)
-
 	// Start the server
 	port := os.Getenv("PORT")
     if port == "" {
         port = "8080" // Default port for local development
     }
 
+	// Serve static files for local development (not for production)
+	if port == "8080" { // Local development check (can also use a custom environment variable)
+		fs := http.FileServer(http.Dir("./web"))
+		http.Handle("/", fs)
+	}
+
     log.Printf("Server starting on port %s...\n", port)
-    log.Fatal(http.ListenAndServe(":"+port, nil))
-
-	servUrl:= "localhost:" + port
-
-	http.ListenAndServe(servUrl, nil)
-
+    log.Fatal(http.ListenAndServe("localhost:"+port, nil))
 
 }
