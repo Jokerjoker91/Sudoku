@@ -1,0 +1,51 @@
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 2px;
+  max-width: 398px;
+  margin: auto;
+  border: 2px solid #ccc; /* Add border around the entire grid */
+}
+
+.sudoku-cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sudoku-cell[contenteditable="true"]:focus {
+  outline: none;
+}
+
+.sudoku-cell[contenteditable="true"] {
+  padding: 0;
+  display: flex;
+  align-items: center; /* Centers the cursor vertically */
+  justify-content: center; /* Ensures content is centered horizontally */
+  font-weight: normal; /* Remove bold for editable cells */
+}
+
+/* Add styles for the 3x3 subgrids (highlight every 3rd row and column) */
+.sudoku-cell.highlight-row {
+  border-bottom: 2px solid black;
+}
+
+.sudoku-cell.highlight-column {
+  border-right: 2px solid black;
+}
+
+/* New styles for initial numbers */
+.initial {
+  font-weight: bold; /* Bold font */
+  background-color: #f1f1f1; /* Slight gray background */
+  user-select: none; /* Prevent editing */
+}
