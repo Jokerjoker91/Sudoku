@@ -5,7 +5,7 @@ document
       const apiUrl =
         location.hostname === "localhost" || location.hostname === "127.0.0.1"
           ? "http://localhost:8080/generate?difficulty=5" // Local URL for development
-          : "https://sudoku-yy8u.onrender.com/generate"; // GitHub Pages URL for production
+          : "https://sudoku-yy8u.onrender.com/generate?difficulty=5"; // GitHub Pages URL for production
 
       const response = await fetch(apiUrl); // Fetch the grid from the appropriate URL
       const sudokuGrid = await response.json();
