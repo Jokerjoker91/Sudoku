@@ -1,10 +1,87 @@
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #2d3a4f;
+}
+
+p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Difficulty Selector */
+.difficulty-selector {
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white;
+  background-color: #5f9ea0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #468b8e;
+}
+
+/* Sudoku Grid */
 .sudoku-grid {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   gap: 2px;
-  max-width: 398px;
-  margin: auto;
-  border: 2px solid #ccc; /* Add border around the entire grid */
+  max-width: 380px;
+  margin: 20px auto;
+  border: 2px solid #ccc;
+  background-color: #fff;
 }
 
 .sudoku-cell {
@@ -16,6 +93,7 @@
   background-color: #f8f8f8;
   border: 1px solid #ccc;
   font-size: 18px;
+  font-weight: normal;
   text-align: center;
   user-select: none;
   cursor: pointer;
@@ -29,12 +107,17 @@
 .sudoku-cell[contenteditable="true"] {
   padding: 0;
   display: flex;
-  align-items: center; /* Centers the cursor vertically */
-  justify-content: center; /* Ensures content is centered horizontally */
-  font-weight: normal; /* Remove bold for editable cells */
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
 }
 
-/* Add styles for the 3x3 subgrids (highlight every 3rd row and column) */
+.sudoku-cell.initial {
+  font-weight: normal;
+  background-color: #f1f1f1;
+  user-select: none;
+}
+
 .sudoku-cell.highlight-row {
   border-bottom: 2px solid black;
 }
@@ -43,9 +126,28 @@
   border-right: 2px solid black;
 }
 
-/* New styles for initial numbers */
-.initial {
-  font-weight: bold; /* Bold font */
-  background-color: #f1f1f1; /* Slight gray background */
-  user-select: none; /* Prevent editing */
+/* Responsive Styling */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .difficulty-selector {
+    margin-bottom: 10px;
+  }
+
+  .sudoku-grid {
+    max-width: 90%;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .sudoku-cell {
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+  }
 }
