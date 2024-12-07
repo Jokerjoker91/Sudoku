@@ -6,8 +6,30 @@ import (
 	"os"
 	"sudoku-app/internal/handlers"
 
+	"time"
+
 	"github.com/rs/cors"
 )
+
+// Middleware to log client analytics (IP, user agent, and request time)
+func analyticsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Get client IP address (might need to adjust for proxies in production)
+		clientIP := r.RemoteAddr
+
+		// Get the User-Agent (browser and device information)
+		userAgent := r.UserAgent()
+
+		// Get the current time of the request
+		requestTime := time.Now().Format(time.RFC1123)
+
+		// Log the analytics data
+		log.Printf("Client IP: %s, User-Agent: %s, Request Time: %s, Requested Path: %s\n", clientIP, userAgent, requestTime, r.URL.Path)
+
+		// Call the next handler
+		next.ServeHTTP(w, r)
+	})
+}
 
 func main() {
 
@@ -21,9 +43,9 @@ func main() {
 	mux := http.NewServeMux()
 
     // Sudoku-related handlers
-    mux.HandleFunc("/generate", handlers.GenerateHandler)
-    mux.HandleFunc("/solve", handlers.SolveHandler)
-    mux.HandleFunc("/validate", handlers.ValidateHandler)
+    mux.Handle("/generate", analyticsMiddleware(http.HandlerFunc(handlers.GenerateHandler)))
+    mux.Handle("/solve", analyticsMiddleware(http.HandlerFunc(handlers.SolveHandler)))
+    mux.Handle("/validate", analyticsMiddleware(http.HandlerFunc(handlers.ValidateHandler)))
 
 	// Start the server
 	port := os.Getenv("PORT")
