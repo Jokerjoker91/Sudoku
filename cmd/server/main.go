@@ -19,13 +19,14 @@ func main() {
         port = "8080" // Default port for local development
     }
 
+	log.Printf("Server starting on port %s...\n", port)
+
 	// Serve static files for local development (not for production)
 	if port == "8080" { // Local development check (can also use a custom environment variable)
 		fs := http.FileServer(http.Dir("./web"))
 		http.Handle("/", fs)
+		log.Fatal(http.ListenAndServe("localhost:"+port, nil))
+	} else {
+		log.Fatal(http.ListenAndServe(":"+port, nil))
 	}
-
-    log.Printf("Server starting on port %s...\n", port)
-    log.Fatal(http.ListenAndServe("localhost:"+port, nil))
-
 }
