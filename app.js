@@ -1,7 +1,7 @@
 document
   .getElementById("generate-btn")
   .addEventListener("click", async function () {
-    console.log(hostname)
+    console.log(location.hostname)
     try {
       const apiUrl =
         location.hostname === "localhost" || location.hostname === "127.0.0.1"
