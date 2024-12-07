@@ -23,8 +23,10 @@ document
           cellElement.contentEditable = cell === 0; // Make cell editable if empty
           cellElement.textContent = cell !== 0 ? cell : ""; // Show empty cell if value is 0
 
-          if (rowIndex % 3 === 2) cellElement.classList.add("highlight-row");
-          if (colIndex % 3 === 2) cellElement.classList.add("highlight-column");
+          if (rowIndex % 3 === 2 && rowIndex != 8)
+            cellElement.classList.add("highlight-row");
+          if (colIndex % 3 === 2 && colIndex != 8)
+            cellElement.classList.add("highlight-column");
 
           // Add the .initial class for cells that are pre-filled (non-null values)
           if (cell !== 0) {
